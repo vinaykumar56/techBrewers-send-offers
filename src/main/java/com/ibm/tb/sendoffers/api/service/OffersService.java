@@ -6,6 +6,8 @@ import com.ibm.tb.sendoffers.api.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,7 +21,9 @@ public class OffersService {
         SendAllOfferDetails allOfferDetails = new SendAllOfferDetails();
         List<CustomerCategoryDetails> categoryDetailsList =	categoryDetails.getCategoryDetails();
         List<OfferDetails> offerDetailsList =	offerDetails.getOfferDetails();
+        List<SendOfferDetails> SendOfferDetailsList = new ArrayList<>();
 
+        System.out.println(categoryDetailsList);
         for (CustomerCategoryDetails categoryDetails :categoryDetailsList) {
 
             List<AggregateCategoryDetails> transactionCategoryDetailsList =	categoryDetails.getTransactionCategoryDetails();
@@ -37,12 +41,16 @@ public class OffersService {
                 if (tempC != null && tempC.equalsIgnoreCase(offer.getCategory())) {
                     SendOfferDetails sendOfferDetails = new SendOfferDetails();
                     sendOfferDetails.setCustomerId(categoryDetails.getCustomerId());
-                    sendOfferDetails.getOfferDetails().add(offer);
-                    allOfferDetails.getSendOfferDetails().add(sendOfferDetails);
+                    List<OfferDetails> offerDetails = new ArrayList<>();
+                    offerDetails.add(offer);
+                    sendOfferDetails.setOfferDetails(offerDetails);
+                    SendOfferDetailsList.add(sendOfferDetails);
                 }
             }
         }
 
+        allOfferDetails.setSendOfferDetails(SendOfferDetailsList);
+        System.out.println(allOfferDetails);
         return allOfferDetails;
     }
 }

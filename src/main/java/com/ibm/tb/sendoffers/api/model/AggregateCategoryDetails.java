@@ -14,5 +14,4 @@ public class AggregateCategoryDetails {
     private String category;
     private double totalAmountSpent;
     private int transactionsCount;
-
 }
