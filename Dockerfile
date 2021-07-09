@@ -13,8 +13,8 @@ WORKDIR /app
 
 COPY --from=MAVEN_BUILD /build/target/techBrewers-send-offers-1.0.jar /app/
 
-ENV PORT 8081
+ENV PORT 8085
 
-EXPOSE 8081
+EXPOSE 8085
 
 ENTRYPOINT ["java", "-jar", "techBrewers-send-offers-1.0.jar"]
