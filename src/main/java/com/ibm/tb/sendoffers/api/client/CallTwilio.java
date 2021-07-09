@@ -14,9 +14,6 @@ public class CallTwilio {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("${twilio.url.post}")
-    private String postUrl;
-
     private final String accountSid = "AC302ea8c90119323d6c35258987f2d000";
     private final String token = "a5d50bb1020d748198932dffd11a21fc";
 
