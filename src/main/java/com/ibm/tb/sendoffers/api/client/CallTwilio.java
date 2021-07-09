@@ -14,8 +14,10 @@ public class CallTwilio {
     @Autowired
     private RestTemplate restTemplate;
 
-    private final String accountSid = "AC302ea8c90119323d6c35258987f2d000";
-    private final String token = "a5d50bb1020d748198932dffd11a21fc";
+    @Value("${account}")
+    private String accountSid;
+    @Value("${token}")
+    private String token;
 
     public void postCustomerOfferMessage(SendSMS sms){
 

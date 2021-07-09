@@ -5,6 +5,7 @@ import com.ibm.tb.sendoffers.api.client.CallOfferDetails;
 import com.ibm.tb.sendoffers.api.client.CallTwilio;
 import com.ibm.tb.sendoffers.api.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,13 @@ public class OffersService {
     private CallOfferDetails offerDetails;
     @Autowired
     private CallTwilio twilio;
+
+    @Value("${phone.to.1001}")
+    private String to1001;
+    @Value("${phone.to.1002}")
+    private String to1002;
+    @Value("${phone.from}")
+    private String from;
 
     public SendAllOfferDetails getAllOffers() {
         SendAllOfferDetails allOfferDetails = new SendAllOfferDetails();
@@ -56,14 +64,14 @@ public class OffersService {
         for (SendOfferDetails sendOfferDetails : SendOfferDetailsList) {
             if (sendOfferDetails.getCustomerId() == 1001) {
                 SendSMS sms = new SendSMS();
-                sms.setFrom("+12543311363");
-                sms.setTo("+919885646360");
+                sms.setFrom(from);
+                sms.setTo(to1001);
                 sms.setBody(sendOfferDetails.getOfferDetails().get(0).getDescription());
                 twilio.postCustomerOfferMessage(sms);
             } else if (sendOfferDetails.getCustomerId() == 1002) {
                 SendSMS sms = new SendSMS();
-                sms.setFrom("+12543311363");
-                sms.setTo("+917013383726");
+                sms.setFrom(from);
+                sms.setTo(to1002);
                 sms.setBody(sendOfferDetails.getOfferDetails().get(0).getDescription());
                 twilio.postCustomerOfferMessage(sms);
             }
