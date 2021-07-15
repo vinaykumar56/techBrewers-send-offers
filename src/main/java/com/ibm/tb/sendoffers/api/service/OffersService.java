@@ -30,7 +30,7 @@ public class OffersService {
         SendAllOfferDetails allOfferDetails = new SendAllOfferDetails();
         List<CustomerCategoryDetails> categoryDetailsList =	categoryDetails.getCategoryDetails();
         List<OfferDetails> offerDetailsList =	offerDetails.getOfferDetails();
-        List<SendOfferDetails> SendOfferDetailsList = new ArrayList<>();
+        List<SendOfferDetails> SendOfferDetailsList = new ArrayList<SendOfferDetails>();
 
         System.out.println(categoryDetailsList);
         for (CustomerCategoryDetails categoryDetails :categoryDetailsList) {
