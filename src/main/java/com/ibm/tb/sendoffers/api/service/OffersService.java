@@ -63,19 +63,44 @@ public class OffersService {
 
         for (SendOfferDetails sendOfferDetails : SendOfferDetailsList) {
             if (sendOfferDetails.getCustomerId() == 1001) {
-                SendSMS sms = new SendSMS();
-                sms.setFrom(from);
-                sms.setTo(to1001);
-                sms.setBody(sendOfferDetails.getOfferDetails().get(0).getDescription());
-                twilio.postCustomerOfferMessage(sms);
+                if(to1001.contains(",")){
+                    String[] list=to1001.split(",");
+                    for(String toNumber : list){
+                        System.out.println("1001 to number="+toNumber);
+                        SendSMS sms = new SendSMS();
+                        sms.setFrom(from);
+                        sms.setTo(toNumber);
+                        sms.setBody(sendOfferDetails.getOfferDetails().get(0).getDescription());
+                        twilio.postCustomerOfferMessage(sms);
+                    }
+                }else {
+                    System.out.println("Single number 1001 to number="+to1001);
+                    SendSMS sms = new SendSMS();
+                    sms.setFrom(from);
+                    sms.setTo(to1001);
+                    sms.setBody(sendOfferDetails.getOfferDetails().get(0).getDescription());
+                    twilio.postCustomerOfferMessage(sms);
+                }
             } else if (sendOfferDetails.getCustomerId() == 1002) {
-                SendSMS sms = new SendSMS();
-                sms.setFrom(from);
-                sms.setTo(to1002);
-                sms.setBody(sendOfferDetails.getOfferDetails().get(0).getDescription());
-                twilio.postCustomerOfferMessage(sms);
+                if (to1002.contains(",")) {
+                    String[] list = to1002.split(",");
+                    for (String toNumber : list) {
+                        System.out.println("1002 to number=" + toNumber);
+                        SendSMS sms = new SendSMS();
+                        sms.setFrom(from);
+                        sms.setTo(toNumber);
+                        sms.setBody(sendOfferDetails.getOfferDetails().get(0).getDescription());
+                        twilio.postCustomerOfferMessage(sms);
+                    }
+                } else {
+                    System.out.println("Single number 1002 to number="+to1002);
+                    SendSMS sms = new SendSMS();
+                    sms.setFrom(from);
+                    sms.setTo(to1002);
+                    sms.setBody(sendOfferDetails.getOfferDetails().get(0).getDescription());
+                    twilio.postCustomerOfferMessage(sms);
+                }
             }
-
         }
         return allOfferDetails;
     }
